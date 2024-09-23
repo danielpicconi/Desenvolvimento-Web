@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Principal - Validação de Implementação</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+    <h1>Validação da Implementação do Servidor com cURL</h1>
+</header>
+
+<div class="container">
+    <h2>Introdução</h2>
+    <p>Este tutorial orienta você sobre como validar a implementação do servidor utilizando <strong>cURL</strong> diretamente do terminal. Os comandos fornecidos são essenciais para verificar o funcionamento das rotas e garantir que as funcionalidades foram implementadas corretamente.</p>
+
+    <div class="highlight">
+        <strong>Nota:</strong> Certifique-se de que o servidor esteja rodando antes de testar. Utilize o seguinte comando para iniciar o servidor:
+        <pre>node server.js</pre>
+    </div>
+
+    <h2>1. Acessando a Página Inicial (GET /)</h2>
+    <p>Para verificar se a página principal do servidor está sendo exibida corretamente, execute o seguinte comando no terminal:</p>
+    <div class="command">
+        curl http://localhost:3000/
+    </div>
+    <p><span class="important">Esperado:</span> O servidor deve retornar o conteúdo da página <strong>index.html</strong>.</p>
+
+    <h2>2. Acessando a Página Sobre (GET /about)</h2>
+    <p>Para testar se a página "Sobre" está acessível e sendo servida corretamente, utilize o seguinte comando:</p>
+    <div class="command">
+        curl http://localhost:3000/about
+    </div>
+    <p><span class="important">Esperado:</span> O servidor deve retornar o conteúdo da página <strong>about.html</strong>.</p>
+
+    <h2>3. Simulando Upload de Arquivo (POST /upload)</h2>
+    <p>Para testar a funcionalidade de upload, envie uma requisição <strong>POST</strong> com dados simulados:</p>
+    <div class="command">
+        curl -X POST http://localhost:3000/upload -d "fileData=simulacao"
+    </div>
+    <p><span class="important">Esperado:</span> O servidor deve retornar a mensagem: <em>"Upload simulado com sucesso!"</em></p>
+
+    <h2>4. Testando Rota Inexistente (GET /rota-inexistente)</h2>
+    <p>Para validar o tratamento de erros 404, tente acessar uma rota inexistente:</p>
+    <div class="command">
+        curl http://localhost:3000/rota-inexistente
+    </div>
+    <p><span class="important">Esperado:</span> O servidor deve retornar a página de erro <strong>error404.html</strong>.</p>
+
+    <h2>5. Testando Rota Inexistente com POST (POST /rota-inexistente)</h2>
+    <p>Para garantir que o erro 404 também funciona para requisições <strong>POST</strong>, execute:</p>
+    <div class="command">
+        curl -X POST http://localhost:3000/rota-inexistente
+    </div>
+    <p><span class="important">Esperado:</span> O servidor deve retornar a página de erro <strong>error404.html</strong> ou uma mensagem informando que a rota não foi encontrada.</p>
+
+    <div class="note">
+        <strong>Dica:</strong> Todos os testes são feitos localmente, então você deve ter certeza de que o servidor está rodando no <code>localhost</code> e na porta correta. Se o servidor estiver em outra máquina ou hospedado online, substitua <code>localhost</code> pelo IP ou domínio.
+    </div>
+</div>
+
+<footer>
+    <p>Servidor rodando em <strong>http://localhost:3000</strong></p>
+</footer>
+
+</body>
+</html>
